@@ -6,11 +6,26 @@ from test_framework.random_sequence_checker import (
     binomial_coefficient, check_sequence_is_uniformly_random,
     compute_combination_idx, run_func_with_retries)
 from test_framework.test_utils import enable_executor_hook
+import random
 
 
 def random_sampling(k: int, A: List[int]) -> None:
-    # TODO - you fill in here.
-    return
+    # problem: given a list of integers and a size K, move a random, unique subset of k integers into the first k digits of the list
+    # solution: set i to 0, loop while i < k
+    # generate a random number, and mod it over (n-i) to get an index in the list, call that r
+    # move L[r] into L[i]
+    # increment i   
+    i = 0
+    while i < k:
+        # pick a random index we haven't picked from yet
+        rand = random.randint(i, len(A)-1)
+        r = rand
+        print(f"random index is ${r}")
+        # Swap it into the lowest index
+        A[i], A[r] = A[r], A[i]
+        i+=1
+    print(f"result is {A}")
+    return A
 
 
 @enable_executor_hook
