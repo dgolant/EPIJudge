@@ -7,9 +7,25 @@ from test_framework.test_failure import TestFailure
 from test_framework.test_utils import enable_executor_hook
 
 
+
+# Assume next_even is first, next_odd is last
+# Check whether next_odd points to an even or an odd
+# if even, swap with next_even, increment next even
+# if odd, decrement next_odd
 def even_odd(A: List[int]) -> None:
-    # TODO - you fill in here.
-    return
+    next_even = 0
+    next_odd = len(A) - 1
+
+    while next_even < next_odd:
+        if A[next_odd] % 2 == 0:
+            temp = A[next_even]
+            A[next_even] = A[next_odd]
+            A[next_odd] = temp
+            next_even+=1
+        else:
+            next_odd-=1
+
+
 
 
 @enable_executor_hook
