@@ -490,7 +490,7 @@ problem_mapping = {
                 "total": 15002
             },
             "Python: string_integer_interconversion.py": {
-                "passed": 15002,
+                "passed": 0,
                 "total": 15002
             }
         },

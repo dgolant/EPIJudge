@@ -23,11 +23,15 @@ def int_to_string(x: int) -> str:
     
     input = abs(x)
     output = []
+
     while input > 0:
       lsb = input%10
-      output.append(int_string_map[lsb])
+      # x%10 gives the LSB of x, ord('0') is the integer code point for '0', so joining them is saying "give me the integer for the char 0, and then offset that by LSB of x"
+      # chr turns that back into a char
+      output.append(chr(ord('0')+x%10))
       # drop the least significant digit
       input//=10
+    
     if x < 0:
         # swap the final digit magnitude
         output[-1]= "-"+output[-1]
