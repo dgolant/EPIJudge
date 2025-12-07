@@ -1,19 +1,6 @@
 from test_framework import generic_test
 from test_framework.test_failure import TestFailure
-
-string_int_map = {
-    "0": 0,
-    "1": 1, 
-    "2": 2,
-    "3": 3, 
-    "4": 4,
-    "5": 5, 
-    "6": 6,
-    "7": 7, 
-    "8": 8,
-    "9": 9, 
-    "-": -1,
-}
+import string
 
 int_string_map = {
     0: "0",
@@ -48,22 +35,19 @@ def int_to_string(x: int) -> str:
     return res
 
 
-
+# "+4253"
 def string_to_int(s: str) -> int:
     res=0
     mag=1
-    for c in reversed(s):
-        if c == "+":
+    valence = -1 if s[0] == "-" else 1
+
+    for c in s:
+        if c in "-+":
             continue
-        i = string_int_map[c]
-        if i != -1:
-          adder = i*mag
-          res+=adder
-        else:
-            # we know we're on the last index so this is safe
-            res*=-1
-        mag*=10
-    return res
+        res*=10
+        res+=string.digits.index(c)
+    return res*valence
+    
 
 
 def wrapper(x, s):
