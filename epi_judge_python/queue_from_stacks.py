@@ -1,15 +1,19 @@
 from test_framework import generic_test
 from test_framework.test_failure import TestFailure
 
+head = []
+tail = []
 
 class Queue:
     def enqueue(self, x: int) -> None:
-        # TODO - you fill in here.
+        head.append(x)
         return
 
     def dequeue(self) -> int:
-        # TODO - you fill in here.
-        return 0
+        if not tail:
+            while head:
+                tail.append(head.pop())
+        return tail.pop()
 
 
 def queue_tester(ops):
