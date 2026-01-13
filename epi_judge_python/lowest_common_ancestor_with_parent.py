@@ -20,8 +20,7 @@ def lca(node0: BinaryTreeNode,
     dummy0, dummy1 = node0, node1
     if node0 is node1:
         return node0
-    zero_height = get_height(node0)
-    one_height = get_height(node1)
+    zero_height, one_height = get_height(node0), get_height(node1)
     while zero_height > one_height:
         node0 = node0.parent
         zero_height-=1
@@ -29,14 +28,11 @@ def lca(node0: BinaryTreeNode,
         node1 = node1.parent
         one_height-=1
 
-    if node0 is node1:
-        return node0
-    
-    while node0.parent != node1.parent:
+    while node0 != node1:
         node0 = node0.parent
         node1 = node1.parent
 
-    return node0.parent
+    return node0
     
 
 
