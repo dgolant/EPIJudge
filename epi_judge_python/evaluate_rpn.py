@@ -12,10 +12,9 @@ def flush(operator, first, second):
         case "*":
             return int(first)*int(second)
         case "/":
-            return int(first)/int(second)
+            return int(first)//int(second)
 
 def evaluate(expression: str) -> int:
-    # TODO - you fill in here.
     ops = deque(expression.split(","))
     print(expression)
     expr = []
