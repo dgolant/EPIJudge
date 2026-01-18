@@ -2,6 +2,7 @@ import functools
 
 from test_framework import generic_test
 from test_framework.test_utils import enable_executor_hook
+from collections import deque
 
 
 class BinaryTreeNode:
@@ -13,8 +14,33 @@ class BinaryTreeNode:
 
 
 def construct_right_sibling(tree: BinaryTreeNode) -> None:
-    # TODO - you fill in here.
-    return
+    
+    if not tree:
+        return None
+    
+    queue = deque([deque([tree])])
+    
+    # traverse, level by level, from right to left. 
+    # take ref to "prev" when poplefting the current
+    # when poplefting head, point its "next" to prev
+    while queue:
+        level = queue.popleft()
+        prev = None
+        while level:
+            head = level.popleft()            
+            # point to sibling
+            if prev:
+                head.next = prev
+
+            # enqueue children in next level
+            if not queue:
+                queue.append(deque())
+            for child in [head.right, head.left]:
+              if child:
+                  queue[-1].append(child)
+
+            # set sibling for next iteration
+            prev = head
 
 
 def traverse_next(node):

@@ -6,10 +6,46 @@ from test_framework import generic_test
 from test_framework.test_failure import TestFailure
 from test_framework.test_utils import enable_executor_hook
 
+def leaf(tree: BinaryTreeNode) -> bool:
+    return not tree.left and not tree.right
+
+def add_leaves(tree: BinaryTreeNode, res: List[int]):
+    if not tree:
+        return None
+    if not tree.left and not tree.right:
+        res.append(tree)
+    
+    add_leaves(tree.left, res)
+    add_leaves(tree.right, res)
+
+
+def build_edge(tree: BinaryTreeNode, res: List[int], direction_left: bool):
+    if not tree:
+        return None
+    
+    if not leaf(tree):
+      print(f"Not leaf {tree.data}")
+      res.append(tree)
+
+    if direction_left:
+        next = tree.left if tree.left else tree.right
+        build_edge(next, res, direction_left)
+    else:
+        next = tree.right if tree.right else tree.left
+        build_edge(next, res, direction_left)
 
 def exterior_binary_tree(tree: BinaryTreeNode) -> List[BinaryTreeNode]:
-    # TODO - you fill in here.
-    return []
+    res = []
+    if tree:
+      build_edge(tree, res, True)
+      add_leaves(tree, res)
+      right_edge = []
+      build_edge(tree, right_edge, False)
+      right_edge.reverse()
+      right_edge.pop()
+      res.extend(right_edge)
+
+    return res
 
 
 def create_output_list(L):
