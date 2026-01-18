@@ -5,10 +5,23 @@ from binary_tree_node import BinaryTreeNode
 from test_framework import generic_test
 from test_framework.test_utils import enable_executor_hook
 
+def process_list(preorder: List[int]) -> BinaryTreeNode:
+    data = preorder.pop()
+    if not data:
+        return None
+    
+    left_subtree = process_list(preorder)
+    right_subtree = process_list(preorder)
+    
+    return BinaryTreeNode(data, left_subtree, right_subtree)
 
 def reconstruct_preorder(preorder: List[int]) -> BinaryTreeNode:
-    # TODO - you fill in here.
-    return BinaryTreeNode()
+    preorder.reverse()
+    dummy_head = head = preorder[-1]
+    
+    return process_list(preorder)
+            
+            
 
 
 @enable_executor_hook
