@@ -9,7 +9,7 @@ def merge_sorted_arrays(sorted_arrays: List[List[int]]) -> List[int]:
     for lst in sorted_arrays:
       [heapq.heappush(heap, child) for child in lst]
       
-    print(f"heap:{heap}")
+    # print(f"heap:{heap}")
     x = [heapq.heappop(heap) for _ in range(len(heap))]
     
     return x
