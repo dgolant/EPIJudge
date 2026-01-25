@@ -3,9 +3,15 @@ from typing import Iterator, List
 from test_framework import generic_test
 
 
+
+
 def online_median(sequence: Iterator[int]) -> List[float]:
-    # TODO - you fill in here.
-    return []
+    one_half = [next(sequence)]
+    two_half = [next(sequence)]
+    res = [one_half[0], (one_half[0]+two_half[0])/2]
+
+    for num in sequence:
+
 
 
 def online_median_wrapper(sequence):
