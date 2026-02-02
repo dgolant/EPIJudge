@@ -1,18 +1,27 @@
 from test_framework import generic_test
 from test_framework.test_failure import TestFailure
-
+from collections import deque
 
 class LruCache:
     def __init__(self, capacity: int) -> None:
         # TODO - you fill in here.
+        self.capacity = capacity
+        self.data = {}
+        self.lru = deque()
         return
 
     def lookup(self, isbn: int) -> int:
-        # TODO - you fill in here.
-        return 0
+        if isbn not in self.data:
+            return -1
+        val, pos = self.data[isbn]
+        self.lru.
+        return val
 
     def insert(self, isbn: int, price: int) -> None:
-        # TODO - you fill in here.
+        self.lru.append(isbn)
+        if len(self.lru) > self.capacity:
+            self.lru.popleft()
+        self.data[isbn] = (price, self.lru.length-1)
         return
 
     def erase(self, isbn: int) -> bool:
