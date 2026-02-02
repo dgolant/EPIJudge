@@ -7,11 +7,25 @@ from test_framework.binary_tree_utils import must_find_node
 from test_framework.test_failure import TestFailure
 from test_framework.test_utils import enable_executor_hook
 
+visited = {}
+
 
 def lca(node0: BinaryTreeNode,
         node1: BinaryTreeNode) -> Optional[BinaryTreeNode]:
-    # TODO - you fill in here.
+    curr, next = node0, node1
+    while node0 or node1:
+        # swap in active node
+        curr, next = next, curr
+        if curr:
+            if curr in visited:
+                return curr
+            else:
+                visited[curr] = True
+            curr = curr.parent
     return None
+
+
+
 
 
 @enable_executor_hook
